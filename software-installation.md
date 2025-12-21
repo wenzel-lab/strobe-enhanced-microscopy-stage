@@ -71,7 +71,7 @@ Pillow 9.4.0
 ```
 **Method 1:** Use the terminal window and install each of the above libraries with `pip install`. Example: `pip install Flask==1.0.2`
 
-**Method 2:** Download [requirements.txt](https://github.com/wenzel-lab/open-microfluidics-workstation/blob/master/module-pi/requirements.txt) file and copy it into your Home folder on your Pi. Use the terminal window and install all the libraries with `pip install -r requirements.txt` 
+**Method 2:** Download [requirements.txt](https://github.com/wenzel-lab/modular-microfluidics-workstation-controller/blob/master/user-interface-software/src/requirements.txt) file and copy it into your Home folder on your Pi. Use the terminal window and install all the libraries with `pip install -r requirements.txt` 
 
 >i Use `pip list` to verify which modules are installed and their versions. 
 
@@ -79,7 +79,7 @@ Pillow 9.4.0
 
 GPIO pins states must be modified during the bootup sequence to use them with the peripherals of the workstation. Our own custom `dt-blob.bin` file specifies which pin states should change:
 
-* Download the [dts file](https://github.com/wenzel-lab/open-microfluidics-workstation/blob/master/module-pi/pi_config/dt-blob.dts) and copy it into your Home folder.
+* Download the [dts file](https://github.com/wenzel-lab/modular-microfluidics-workstation-controller/blob/master/TEMP/module-pi/pi_config/dt-blob.dts) and copy it into your Home folder.
 * Install the Device Tree compiler by running `sudo apt install device-tree-compiler`
 * Run the `dtc` command `sudo dtc -I dts -O dtb -o /boot/dt-blob.bin dt-blob.dts`
 
@@ -87,7 +87,7 @@ GPIO pins states must be modified during the bootup sequence to use them with th
 
 ## Run the UI App {pagestep}
 
-Download the [zip file](https://github.com/wenzel-lab/moldular-microfluidics-workstation-controller/blob/master/module-pi/webapp.zip), copy it, and extract the folder into your Home folder.
+Download the [folder](https://github.com/wenzel-lab/modular-microfluidics-workstation-controller/tree/master/user-interface-software/src/webapp) and copy it into your Home folder.
 
 **Method 1:** Go to the web app folder and double click on `pi_webapp.py`. A programming editor will open the Python file, then run the code.
 
