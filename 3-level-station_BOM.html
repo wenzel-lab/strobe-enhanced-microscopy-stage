@@ -7,10 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="./assets/favicon.ico" />
 
-    <link href="./static/style.css" rel="stylesheet">
+    <link href="./static/base-style.css" rel="stylesheet">
+    <link href="./static/site-style.css" rel="stylesheet">
                 <link href="./assets/style.css" rel="stylesheet">
                 
-</head>
+        <script type="text/javascript" src="./static/search.js" defer=""></script>
+    </head>
 <body>
 <header class="site-header">
     <div class="wrapper header-wrapper" >
@@ -38,6 +40,34 @@
     <a class="navhome" href="./">
         Strobe-enhanced microscopy stage
     </a>
+</li>
+<li id="nav-search" :class="focused && searchTerm.length > 0 ? 'search-result-popout' : 'search'" v-scope v-on:vue:mounted="mounted('./')">
+  <input
+    type="text"
+    placeholder="Search..."
+    v-on:input="search($event.target.value)"
+    v-on:keypress="handleKeyPress"
+    v-on:keyup.esc="$event.target.blur()"
+    v-on:focus="handleFocus"
+    v-on:blur="handleBlur"
+    :value="searchTerm" />
+    <div class="search-results" v-if="focused && searchTerm.length > 0">
+        <div v-if="searchResults.length > 0">Results:</div>
+        <div v-if="searchResults.length === 0">No results.</div>
+        <template v-for="(result, index) in searchResults">
+            <li>
+                <a class="search-result" :href="`./${result.path}.html`">
+               <span v-for="crumb in result.breadCrumbs.slice(0, -1)">
+                ${crumb + ' > '}
+                </span>
+               ${result.title || result.breadCrumbs[result.breadCrumbs.length - 1]}
+                <p>
+                    <span v-for="node in result.highlightChars" :class="node.mark ? 'highlight' : ''" >${node.chars}</span>
+                </p>
+                </a>
+            </li>
+        </template>
+    </div>
 </li>
 <li class="not-active">
     <a class="not-active" href="./3-level-station.html">
@@ -71,7 +101,7 @@
         <div class="wrapper">
     <h1 id="bill-of-materials">Bill of Materials</h1>
 <p>Download this as a <a href="3-level-station_BOM.csv">CSV file</a></p>
-<h3 id="tool">Tools</h3>
+<h3 id="tools">Tools</h3>
 <ul>
 <li>1 <a Class="bom" href="parts/tools/screwdriver.html">#1 pozidrive screwdriver</a> </li>
 <li>1 <a Class="bom" href="parts/tools/1.5mmBallEndAllenKey.html">1.5mm Ball-end Allen key</a> </li>
@@ -85,12 +115,12 @@
 <li>1 <a Class="bom" href="parts/tools/soldiron.html">Soldering iron</a> </li>
 <li>1 <a Class="bom" href="parts/tools/utility-knife.html">Utility knife</a>    - Not a scalpel!</li>
 </ul>
-<h3 id="consumable">Consumables</h3>
+<h3 id="consumables">Consumables</h3>
 <ul>
 <li>1 drop of <a Class="bom" href="parts/consumables/light-oil.html">light oil</a>    - Optional</li>
 <li>2 <a Class="bom" href="parts/consumables/gloves.html">Nitrile gloves</a> </li>
 </ul>
-<h3 id="electronic">Electronic Components</h3>
+<h3 id="electronic-components">Electronic Components</h3>
 <ul>
 <li>1 <a Class="bom" href="parts/elect/2pin-DuPont-female-housing.html">2 pin Du Pont connector female housing</a> </li>
 <li>1 <a Class="bom" href="parts/elect/30x30x10mm-heatsink.html">30x30x10mm Heat sink</a> </li>
@@ -109,13 +139,13 @@
 <li>1 <a Class="bom" href="parts/elect/strobe-power-supply.html">Strobe Power Supply</a> </li>
 <li>1 <a Class="bom" href="parts/elect/voltage-regulator.html">Voltage regulator</a>    - This regulator has modifications documented <a href="https://github.com/wenzel-lab/open-microfluidics-workstation/" target="_blank" title="">here</a></li>
 </ul>
-<h3 id="material">Materials</h3>
+<h3 id="materials">Materials</h3>
 <ul>
 <li>1 <a Class="bom" href="parts/materials/acrylic-sheet.html">52x18x0.5cm Acrylic sheet</a> </li>
 <li>50 g of <a Class="bom" href="parts/materials/black_pla_filament.html">Black PLA filament</a> </li>
 <li>205 g of <a Class="bom" href="parts/materials/pla_filament.html">PLA filament</a>    - Of any color you want</li>
 </ul>
-<h3 id="mechanic">Mechanical Components</h3>
+<h3 id="mechanical-components">Mechanical Components</h3>
 <ul>
 <li>7 <a Class="bom" href="parts/mech/Hinsert.html">Heat insert</a> </li>
 <li>4 <a Class="bom" href="parts/mech/M2-5.html">M2x5mm cap head screw</a> </li>
@@ -129,10 +159,11 @@
 <li>2 <a Class="bom" href="parts/mech/M3-8.html">M3x8mm cap head screw</a> </li>
 <li>1 <a Class="bom" href="parts/mech/oring.html">O-ring</a> </li>
 </ul>
-<h3 id="optical">Optical Components</h3>
+<h3 id="optical-components">Optical Components</h3>
 <ul>
 <li>1 <a Class="bom" href="parts/optics/8.7-20mm-circular-lens.html">Star-LED lens</a> </li>
 </ul>
+<!-- GitBuilding Nav -->
 <hr />
 <p><a href="3-level-station.html">Previous page</a> | <a href="printing.html">Next page</a></p>
     </div>
@@ -141,9 +172,9 @@
     <div class="wrapper">
         <a target="_blank" rel="noopener noreferrer" href="https://gitbuilding.io">
     <img class="icon" src="./static/Logo/GitBuilding500x.png" alt="GitBuilding logo">
-    <span class="info">Documentation powered by GitBuilding</span>
+    <span class="doc-info">Documentation powered by GitBuilding</span>
 </a>
-    <p class="author">©2024 Pierre Padilla-Huamantinco, Matías Hurtado-Labarca, and Tobias Wenzel</p>
+    <p class="author">©2026 Pierre Padilla-Huamantinco, Matías Hurtado-Labarca, and Tobias Wenzel</p>
     <p class="email">Contact: <a href="mailto:librehub@uc.cl">librehub@uc.cl</a></p>
     <p class="license">Strobe-enhanced microscopy stage is released under <a href="license.html">CERN-OHL-S-2.0</a>.</p>
 

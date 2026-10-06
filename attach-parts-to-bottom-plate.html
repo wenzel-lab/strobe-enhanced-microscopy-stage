@@ -7,10 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="./assets/favicon.ico" />
 
-    <link href="./static/style.css" rel="stylesheet">
+    <link href="./static/base-style.css" rel="stylesheet">
+    <link href="./static/site-style.css" rel="stylesheet">
                 <link href="./assets/style.css" rel="stylesheet">
                 
-</head>
+        <script type="text/javascript" src="./static/search.js" defer=""></script>
+    </head>
 <body>
 <header class="site-header">
     <div class="wrapper header-wrapper" >
@@ -38,6 +40,34 @@
     <a class="navhome" href="./">
         Strobe-enhanced microscopy stage
     </a>
+</li>
+<li id="nav-search" :class="focused && searchTerm.length > 0 ? 'search-result-popout' : 'search'" v-scope v-on:vue:mounted="mounted('./')">
+  <input
+    type="text"
+    placeholder="Search..."
+    v-on:input="search($event.target.value)"
+    v-on:keypress="handleKeyPress"
+    v-on:keyup.esc="$event.target.blur()"
+    v-on:focus="handleFocus"
+    v-on:blur="handleBlur"
+    :value="searchTerm" />
+    <div class="search-results" v-if="focused && searchTerm.length > 0">
+        <div v-if="searchResults.length > 0">Results:</div>
+        <div v-if="searchResults.length === 0">No results.</div>
+        <template v-for="(result, index) in searchResults">
+            <li>
+                <a class="search-result" :href="`./${result.path}.html`">
+               <span v-for="crumb in result.breadCrumbs.slice(0, -1)">
+                ${crumb + ' > '}
+                </span>
+               ${result.title || result.breadCrumbs[result.breadCrumbs.length - 1]}
+                <p>
+                    <span v-for="node in result.highlightChars" :class="node.mark ? 'highlight' : ''" >${node.chars}</span>
+                </p>
+                </a>
+            </li>
+        </template>
+    </div>
 </li>
 <li class="active">
     <a class="active" href="./3-level-station.html">
@@ -128,24 +158,24 @@
         <div class="wrapper">
     <h1 id="attach-parts-to-the-bottom-plate">Attach parts to the bottom plate</h1>
 <div class="pagebom">
-<h3 id="tool">Tools</h3>
+<h3 id="tools">Tools</h3>
 <ul>
 <li>1 <a Class="bom" href="parts/tools/2.5mmBallEndAllenKey.html">2.5mm Ball-end Allen key</a> </li>
 </ul>
-<h3 id="lasercutpart">Laser cut Parts</h3>
+<h3 id="laser-cut-parts">Laser cut Parts</h3>
 <ul>
 <li>1 <a Class="bom" href="parts/materials/bottom-plate.html">Bottom plate</a> </li>
 </ul>
-<h3 id="mechanic">Mechanical Components</h3>
+<h3 id="mechanical-components">Mechanical Components</h3>
 <ul>
 <li>4 <a Class="bom" href="parts/mech/nuts.html">M3 nut</a> </li>
 <li>4 <a Class="bom" href="parts/mech/M3-15.html">M3x15mm cap head screw</a> </li>
 </ul>
-<h3 id="printedpart">Printed Parts</h3>
+<h3 id="printed-parts">Printed Parts</h3>
 <ul>
 <li>4 <a Class="bom" href="models/foot-M.html">Foot-M</a> </li>
 </ul>
-<h3 id="printedtool">Printed Tools</h3>
+<h3 id="printed-tools">Printed Tools</h3>
 <ul>
 <li>1 <a Class="bom" href="models/actuator-assembly-tools.html">Nut tool</a> </li>
 </ul>
@@ -185,6 +215,7 @@
     <img onmouseover="getElementById('gallery-show2').src=this.src" src="images/feet-M-attached_1.jpg" alt="" />
 </div>
 <div class="gallery-show"><img id="gallery-show2" src="images/feet-M-attached.jpg" alt=""/></div>
+<!-- GitBuilding Nav -->
 <hr />
 <p><a href="attach-parts-to-middle-plate.html">Previous page</a> | <a href="mount-optics.html">Next page</a></p>
     </div>
@@ -193,9 +224,9 @@
     <div class="wrapper">
         <a target="_blank" rel="noopener noreferrer" href="https://gitbuilding.io">
     <img class="icon" src="./static/Logo/GitBuilding500x.png" alt="GitBuilding logo">
-    <span class="info">Documentation powered by GitBuilding</span>
+    <span class="doc-info">Documentation powered by GitBuilding</span>
 </a>
-    <p class="author">©2024 Pierre Padilla-Huamantinco, Matías Hurtado-Labarca, and Tobias Wenzel</p>
+    <p class="author">©2026 Pierre Padilla-Huamantinco, Matías Hurtado-Labarca, and Tobias Wenzel</p>
     <p class="email">Contact: <a href="mailto:librehub@uc.cl">librehub@uc.cl</a></p>
     <p class="license">Strobe-enhanced microscopy stage is released under <a href="license.html">CERN-OHL-S-2.0</a>.</p>
 

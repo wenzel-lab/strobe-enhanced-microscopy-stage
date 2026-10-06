@@ -7,10 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="./assets/favicon.ico" />
 
-    <link href="./static/style.css" rel="stylesheet">
+    <link href="./static/base-style.css" rel="stylesheet">
+    <link href="./static/site-style.css" rel="stylesheet">
                 <link href="./assets/style.css" rel="stylesheet">
                 
-</head>
+        <script type="text/javascript" src="./static/search.js" defer=""></script>
+    </head>
 <body>
 <header class="site-header">
     <div class="wrapper header-wrapper" >
@@ -38,6 +40,34 @@
     <a class="navhome" href="./">
         Strobe-enhanced microscopy stage
     </a>
+</li>
+<li id="nav-search" :class="focused && searchTerm.length > 0 ? 'search-result-popout' : 'search'" v-scope v-on:vue:mounted="mounted('./')">
+  <input
+    type="text"
+    placeholder="Search..."
+    v-on:input="search($event.target.value)"
+    v-on:keypress="handleKeyPress"
+    v-on:keyup.esc="$event.target.blur()"
+    v-on:focus="handleFocus"
+    v-on:blur="handleBlur"
+    :value="searchTerm" />
+    <div class="search-results" v-if="focused && searchTerm.length > 0">
+        <div v-if="searchResults.length > 0">Results:</div>
+        <div v-if="searchResults.length === 0">No results.</div>
+        <template v-for="(result, index) in searchResults">
+            <li>
+                <a class="search-result" :href="`./${result.path}.html`">
+               <span v-for="crumb in result.breadCrumbs.slice(0, -1)">
+                ${crumb + ' > '}
+                </span>
+               ${result.title || result.breadCrumbs[result.breadCrumbs.length - 1]}
+                <p>
+                    <span v-for="node in result.highlightChars" :class="node.mark ? 'highlight' : ''" >${node.chars}</span>
+                </p>
+                </a>
+            </li>
+        </template>
+    </div>
 </li>
 <li class="active">
     <a class="active" href="./3-level-station.html">
@@ -128,27 +158,27 @@
         <div class="wrapper">
     <h1 id="assemble-the-basic-optics-module">Assemble the basic optics module</h1>
 <div class="pagebom">
-<h3 id="tool">Tools</h3>
+<h3 id="tools">Tools</h3>
 <ul>
 <li>1 <a Class="bom" href="parts/tools/1.5mmBallEndAllenKey.html">1.5mm Ball-end Allen key</a> </li>
 <li>1 <a Class="bom" href="parts/tools/pi_camera_lens_tool.html">Pi Camera lens tool</a>    - This should come with the Raspberry Pi Camera Module. If it is missing, you can 3D print a workaround lens remover.</li>
 </ul>
-<h3 id="consumable">Consumables</h3>
+<h3 id="consumables">Consumables</h3>
 <ul>
 <li>2 <a Class="bom" href="parts/consumables/gloves.html">Nitrile gloves</a> </li>
 </ul>
-<h3 id="electronic">Electronic Components</h3>
+<h3 id="electronic-components">Electronic Components</h3>
 <ul>
 <li>1 <a Class="bom" href="parts/elect/rpi-camera-ribbon-cable.html">Pi camera ribbon cable</a> </li>
 <li>1 <a Class="bom" href="parts/elect/rpi-camera-v2.html">Raspberry Pi Camera Module v2</a> </li>
 </ul>
-<h3 id="mechanic">Mechanical Components</h3>
+<h3 id="mechanical-components">Mechanical Components</h3>
 <ul>
 <li>4 <a Class="bom" href="parts/mech/M2-5.html">M2x5mm cap head screw</a> </li>
 <li>1 <a Class="bom" href="parts/mech/nuts.html">M3 nut</a> </li>
 <li>1 <a Class="bom" href="parts/mech/M3-10.html">M3x10mm cap head screw</a> </li>
 </ul>
-<h3 id="printedpart">Printed Parts</h3>
+<h3 id="printed-parts">Printed Parts</h3>
 <ul>
 <li>1 <a Class="bom" href="models/lens-spacer.html">Lens spacer</a> </li>
 <li>1 <a Class="bom" href="models/camera-platform.html">Pi Camera platform</a> </li>
@@ -227,6 +257,7 @@
 <div class="gallery-show"><img id="gallery-show3" src="images/low_cost_optics_assembly_ribbon.jpg" alt=""/></div>
 <h2 class="page-step" id="set-the-complete-module-aside">Step 7: Set the complete module aside</h2>
 <p>Set the <a name="output__complete-optics-module"></a>complete optics module aside in a safe place.</p>
+<!-- GitBuilding Nav -->
 <hr />
 <p><a href="assemble-focus-mechanism.html">Previous page</a> | <a href="attach-parts-to-top-plate.html">Next page</a></p>
     </div>
@@ -235,9 +266,9 @@
     <div class="wrapper">
         <a target="_blank" rel="noopener noreferrer" href="https://gitbuilding.io">
     <img class="icon" src="./static/Logo/GitBuilding500x.png" alt="GitBuilding logo">
-    <span class="info">Documentation powered by GitBuilding</span>
+    <span class="doc-info">Documentation powered by GitBuilding</span>
 </a>
-    <p class="author">©2024 Pierre Padilla-Huamantinco, Matías Hurtado-Labarca, and Tobias Wenzel</p>
+    <p class="author">©2026 Pierre Padilla-Huamantinco, Matías Hurtado-Labarca, and Tobias Wenzel</p>
     <p class="email">Contact: <a href="mailto:librehub@uc.cl">librehub@uc.cl</a></p>
     <p class="license">Strobe-enhanced microscopy stage is released under <a href="license.html">CERN-OHL-S-2.0</a>.</p>
 
