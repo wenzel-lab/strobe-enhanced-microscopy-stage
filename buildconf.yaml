@@ -1,4 +1,4 @@
-Affiliation: Latin American Hub for Bioimaging Through Open Hardware (LIBRE hub)
+Affiliation: Institute for Biological and Medical Engineering, Pontificia Universidad Católica de Chile
 Authors:
   - Pierre Padilla-Huamantinco
   - Matías Hurtado-Labarca
@@ -32,7 +32,7 @@ CustomCategories:
   SubAssembly:
     DisplayName: Sub-Assemblies
     Reuse: false
-Email: librehub@uc.cl
+Email: pgpadilla@uc.cl
 LandingPage: index.md
 License: CERN-OHL-S-2.0
 Navigation:
