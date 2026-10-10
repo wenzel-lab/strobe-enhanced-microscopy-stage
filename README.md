@@ -49,6 +49,26 @@ documentation. More detail on the documentation is available on the
 [syntax for configuration](https://gitbuilding.io/syntax/buildconfsyntax), and for
 [part libraries](https://gitbuilding.io/syntax/builduplibrary/).
 
+## Confirmed replications and external builds
+
+The strobe-enhanced microscopy stage has been replicated by various research groups in Latin America and beyond. The following builds are confirmed:
+
+### LIBRE Hub workshop builds
+
+- **Laboratorio de Biorreología y Microfluídica** — Pontificia Universidad Católica de Valparaíso, Chile — PI: [Claudia Trejo Soto](https://www.pucv.cl/uuaa/estudiantes-de-la-facultad-se-adjudican-startup-ciencia-2025).
+- **Viviana Clavería research group, Instituto de Física** — Pontificia Universidad Católica de Valparaíso, Chile — PI: [Viviana Clavería](https://www.pucv.cl/uuaa/investigan-uso-de-bacterias-modificadas-geneticamente-para-detectar-el).
+- **MiNanoLab** — Universidad Tecnológica Metropolitana, Chile — PI: [Natalia Hassan](https://postgrado.utem.cl/minanolab-utem-microdispositivos-para-nanomedicina-y-medio-ambiente/).
+- **Laboratorio de Fisicoquímica de Superficies e Interfaces** — Universidad Autónoma de Nuevo León, Mexico — PI: [Jorge Luis Menchaca Arredondo](https://www.uanl.mx/investigadores/jorge-luis-menchaca-arredondo/).
+- **SCIAN-Lab (Laboratorio de Procesamiento de Imágenes Científicas)** — Universidad de Chile, Chile — PI/local lead: [Steffen Härtel](https://cimt.uchile.cl/proyectos/).
+- **Instituto de Investigación de Bioingeniería (IIBI)** — Universidad del Norte Santo Tomás de Aquino, Argentina — PI: [Carla Goy](https://www.unsta.edu.ar/ingenieria/bioingenieria/).
+- **Centro de Investigación de Métodos Computacionales (CIMEC)** — CONICET–Universidad Nacional del Litoral, Argentina — PI/local lead: [Pablo Alejandro Kler](https://cimec.conicet.gov.ar/autoridades/).
+
+### Independent rebuilds
+
+- **BioNanoTechnology group** — Wageningen University & Research, the Netherlands — local lead: [Vittorio Saggiomo](https://www.wur.nl/en/persons/dr-v-vittorio-saggiomo). The stage was rebuilt locally using controller boards supplied by the project team.
+- **Korbel Group** — EMBL Heidelberg, Germany — PI: [Jan Korbel](https://www.embl.org/groups/korbel/members/); replication lead: [Patrick Hasenfeld](https://www.embl.org/people/person/patrick-hasenfeld/). The workstation, electronics, and pumps were built independently from the released documentation.
+- **CENBIO, Universidad UTE, in collaboration with ESPOCH** — Quito and Riobamba, Ecuador — PI/project lead: [Ana Belén Peñaherrera Pazmiño](https://cris.ute.edu.ec/entities/person/apenaherrera/otherinfo). **Replication in progress:** two installations comprising the strobe-enhanced microscopy stage and open-source syringe pumps are planned through the Fondo Avante 2026 programme.
+
 ## Contribute
 
 You're free to fork the project and enhance it. If you have any suggestions to improve it or add any additional functions make a pull-request or [open an issue](https://github.com/wenzel-lab/strobe-enhanced-microscopy-stage/issues/new).
